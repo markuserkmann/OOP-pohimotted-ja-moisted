@@ -88,15 +88,12 @@ class Hand:
         """
         values = [card.value for card in self.cards]
         
-        for i in range(len(values)):
-            for j in range(i + 1, len(values)):
-                if values[i] > values[j]:
-                    values[i], values[j] = values[j], values[i]
+        values.sort(key=lambda v: self.values.index(v))
         
         for i in range(1, len(values)):
-            if values[i] != str(int(values[i - 1]) + 1):
+            if self.values.index(values[i]) != self.values.index(values[i - 1]) + 1:
                 return False
-        
+
         return True
 
     def is_flush(self):
